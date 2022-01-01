@@ -1,11 +1,12 @@
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import * as Font from "expo-font";
-import { AppLoadingProps } from "expo-app-loading";
+import AppLoading, { AppLoadingProps } from "expo-app-loading";
 import { enableScreens } from "react-native-screens";
 
-import MealsNavigator from "./navigation/MealsNavigator";
 import { loadAsync } from "expo-font";
+import MealsNavigator from "./navigation/MealsNavigator";
 
 enableScreens();
 
@@ -17,6 +18,18 @@ const fetchFonts = () => {
 };
 
 export default function App() {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  if (!fontLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setFontLoaded(true)}
+        onError={(err) => console.log(err)}
+      />
+    );
+  }
+
   return <MealsNavigator />;
 }
 
