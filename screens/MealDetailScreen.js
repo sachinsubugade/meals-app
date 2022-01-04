@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { MEALS } from "../data/dummy-data";
-import { HeaderButton } from "../components/HeaderButton";
+import HeaderButton from "../components/HeaderButton";
 
 const MealDetailScreen = (props) => {
   const mealId = props.navigation.getParam("mealId");
@@ -29,7 +29,7 @@ MealDetailScreen.navigationOptions = (navigationData) => {
 
   return {
     headerTitle: selectedMeal.title,
-    headerRight: () => {
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Favorite"
@@ -38,8 +38,8 @@ MealDetailScreen.navigationOptions = (navigationData) => {
             console.log("Mark as favorite!");
           }}
         />
-      </HeaderButtons>;
-    },
+      </HeaderButtons>
+    ),
   };
 };
 
